@@ -3,4 +3,21 @@
     background-color: rgb(219, 179, 179);
     margin:2rem;
     border-radius: 1rem;
+    padding:1rem
+}
+
+.timeNoteOther{
+
+    background-color: rgb(196, 185, 147);
+    margin:2rem;
+    border-radius: 1rem;
+    padding:1rem
+}
+
+.timeNoteAll{
+    background-color: rgb(241, 238, 227);
+    margin:2rem;
+    border-radius: 1rem;
+    padding:1rem
+
 }

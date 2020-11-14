@@ -5,7 +5,7 @@ import Description from '../Description';
 import PickTimeDate from '../PickTimeDate';
 import db from '../../firebase';
 import DisplayTimerNotes from '../DisplayTimerNotes';
-// import './App.css';
+import "../TimeNote.css"
 
 function Timer() {
   const [time, setTime] = useState({ms:0, s:0, m:0, h:0});
@@ -69,29 +69,29 @@ function Timer() {
     )
   },[])
 
-  const handleAddTimerNote =()=>{
+  const handleAddTimerNote =(date,h, m)=>{
     const timerNote = prompt("Enter your timer note")
 
     if(timerNote){
       db.collection("timerNotes").add({
         timerNote:timerNote,
-        time:time,
-        date:date
+         time:{h, m},
+         date:date
       })
     }
   }
   console.log(timerNotes)
   return (
-    <div className="main-section">
+    <div className="main-section timeNoteAll">
      <div className="clock-holder">
           <div className="stopwatch">
                <DisplayComponent time={time}/>
               
                <BtnComponent status={status} resume={resume} reset={reset} stop={stop} start={start}/>
                <h5>{date}</h5>
-               <button onClick={handleAddTimerNote}>Save Timer Note</button>
+               <button onClick={()=>handleAddTimerNote(date, time.h, time.m)}>Save Timer Note</button>
                 {/* <Description/> */}
-                <PickTimeDate/>
+                <PickTimeDate addNote={handleAddTimerNote}/>
                 <DisplayTimerNotes data={timerNotes}/>
           </div>
      </div>

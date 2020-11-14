@@ -7,7 +7,7 @@ function DisplayTimerNotes({data}) {
             <div className="timeNote" key={note.id}>
              <p>{note.timerNote.timerNote}</p>   
                 
-<p>{note.timerNote.time?.h}:{note.timerNote.time?.m}:{note.timerNote.time?.s}</p>
+<p>{note.timerNote.time?.h} <span> h </span>: {note.timerNote.time?.m} <span> min </span> </p>
 <p>{note.timerNote.date}</p>
             </div>
     )

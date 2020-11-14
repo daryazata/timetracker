@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState}from 'react'
 import "date-fns"
 import Grid from "@material-ui/core/Grid"
 import DateFnsUtils from "@date-io/date-fns"
@@ -8,18 +8,28 @@ import { MuiPickersUtilsProvider,
 
 } from "@material-ui/pickers"
 import { Input } from '@material-ui/core'
+import {useDispatch} from "react-redux"
+import "./TimeNote.css"
 
-function PickTimeDate() {
+
+function PickTimeDate(props) {
+
+  const dispatch = useDispatch()
 
 
-    const [selectedDate, setSelectedDate] = React.useState(new Date("2020-09-11T12:00:00"))
+    const [selectedDate, setSelectedDate] = useState(new Date("2020-11-14T12:00:00"))
+    const [hours, setHours] = useState(0)
+    const [minutes, setMinutes] = useState(0)
+
 
     const handleDateChange = (date) =>{
         setSelectedDate(date)
     }
 
     return (
-        <div>
+        <div className="timeNoteOther">
+
+            <h2>Plan your Timer</h2>
             <MuiPickersUtilsProvider utils={ DateFnsUtils}>
                 <Grid container justify="space-around"> 
                 
@@ -46,12 +56,15 @@ function PickTimeDate() {
             </MuiPickersUtilsProvider>
             <br/>
                 <label>Hours</label>
-                <input type="text"/>
+                <br/>
+                <input min="1" name="hours" onChange={(e)=>setHours(e.target.value)}  type="number"/>
                 <br/>
                 <label>Minutes</label>
-                <input type="text"/>
                 <br/>
-            <Input/ >
+                <input min="1" max="59" name="minutes" onChange={(e)=>setMinutes(e.target.value)} type="number"/>
+                <br/>
+ 
+            <button onClick={()=>props.addNote(selectedDate.toLocaleDateString(), hours, minutes)}>Save Timer Note</button>
         </div>
     )
 }
